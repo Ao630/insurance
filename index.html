@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>あおぞら生命保険株式会社</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'Hiragino Sans', 'Meiryo', 'Noto Sans JP', sans-serif;
+    background: #f7f9fc;
+    color: #333;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  /* ヘッダー */
+  .top-notice {
+    background: #0052a3;
+    color: #fff;
+    font-size: 12px;
+    text-align: center;
+    padding: 6px;
+    letter-spacing: 1px;
+  }
+  header {
+    background: #fff;
+    border-bottom: 1px solid #dde3ec;
+    padding: 0 clamp(16px, 5vw, 40px);
+  }
+  .header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 0;
+    gap: 16px;
+  }
+  .logo-wrap { display: flex; align-items: center; gap: 12px; }
+  .logo-icon {
+    width: 44px; height: 44px;
+    background: linear-gradient(135deg, #0052a3, #0099cc);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    flex-shrink: 0;
+  }
+  .logo-text-main {
+    font-size: clamp(16px, 3vw, 22px);
+    font-weight: bold;
+    color: #0052a3;
+    letter-spacing: 1px;
+  }
+  .logo-text-sub {
+    font-size: 10px;
+    color: #888;
+    letter-spacing: 1px;
+  }
+  .header-tel {
+    text-align: right;
+    font-size: 12px;
+    color: #666;
+  }
+  .header-tel strong { font-size: 20px; color: #0052a3; display: block; }
+  nav {
+    background: #0052a3;
+    padding: 0 clamp(16px, 5vw, 40px);
+  }
+  .nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+  }
+  nav a {
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    font-size: 13px;
+    padding: 12px 18px;
+    white-space: nowrap;
+    cursor: default;
+    pointer-events: none;
+    display: block;
+  }
+  nav a:hover, nav a.active { background: rgba(255,255,255,0.15); color: #fff; }
+
+  /* メイン */
+  .main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 30px clamp(16px, 4vw, 40px);
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 30px;
+    align-items: start;
+  }
+  @media (max-width: 750px) {
+    .main { grid-template-columns: 1fr; }
+    .aside { display: none; }
+  }
+
+  /* パンくず */
+  .breadcrumb {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 24px;
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .breadcrumb span { color: #bbb; }
+
+  /* コンテンツ */
+  .content-box {
+    background: #fff;
+    border: 1px solid #dde3ec;
+    border-radius: 4px;
+    padding: clamp(20px, 4vw, 36px);
+  }
+  .content-title {
+    font-size: clamp(18px, 3vw, 24px);
+    font-weight: bold;
+    color: #0052a3;
+    margin-bottom: 8px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid #0052a3;
+  }
+  .content-subtitle {
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 28px;
+  }
+  .content-body h2 {
+    font-size: clamp(14px, 2vw, 17px);
+    font-weight: bold;
+    color: #0052a3;
+    background: #f0f5fb;
+    padding: 10px 14px;
+    border-left: 4px solid #0052a3;
+    margin: 28px 0 14px;
+  }
+  .content-body p {
+    margin-bottom: 16px;
+    font-size: 14px;
+    color: #444;
+    line-height: 1.9;
+  }
+
+  /* テーブル */
+  .info-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 13px;
+  }
+  .info-table th {
+    background: #0052a3;
+    color: #fff;
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: normal;
+    width: 30%;
+    vertical-align: top;
+  }
+  .info-table td {
+    background: #fff;
+    padding: 10px 14px;
+    border-bottom: 1px solid #e5ecf5;
+    vertical-align: top;
+    color: #333;
+  }
+  .info-table tr:last-child td { border-bottom: none; }
+
+  /* 重要ボックス */
+  .important-box {
+    background: #fff8e1;
+    border: 1px solid #ffc107;
+    border-left: 4px solid #ff8f00;
+    padding: 18px 20px;
+    margin: 24px 0;
+    border-radius: 2px;
+  }
+  .important-box .important-title {
+    font-size: 13px;
+    font-weight: bold;
+    color: #e65100;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .important-box p {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.9;
+    margin-bottom: 8px;
+  }
+  .important-box p:last-child { margin-bottom: 0; }
+  .important-box .big-text {
+    font-size: clamp(16px, 2.5vw, 20px);
+    font-weight: bold;
+    color: #c62828;
+    display: block;
+    margin: 10px 0;
+  }
+
+  .note {
+    font-size: 12px;
+    color: #888;
+    margin-top: 6px;
+    line-height: 1.8;
+  }
+
+  /* サイドバー */
+  .aside {}
+  .aside-box {
+    background: #fff;
+    border: 1px solid #dde3ec;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  .aside-title {
+    background: #0052a3;
+    color: #fff;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 10px 16px;
+  }
+  .aside-body { padding: 16px; }
+  .aside-link {
+    display: block;
+    font-size: 13px;
+    color: #0052a3;
+    text-decoration: none;
+    padding: 8px 0;
+    border-bottom: 1px solid #eef2f7;
+    cursor: default;
+    pointer-events: none;
+  }
+  .aside-link:last-child { border-bottom: none; }
+  .aside-cta {
+    background: #e8f0fb;
+    padding: 16px;
+    text-align: center;
+  }
+  .aside-cta p { font-size: 12px; color: #555; margin-bottom: 10px; }
+  .btn-primary {
+    display: block;
+    background: #0052a3;
+    color: #fff;
+    font-size: 13px;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 3px;
+    cursor: not-allowed;
+    margin-bottom: 8px;
+  }
+  .btn-secondary {
+    display: block;
+    background: #fff;
+    color: #0052a3;
+    font-size: 13px;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 3px;
+    border: 1px solid #0052a3;
+    cursor: not-allowed;
+  }
+
+  footer {
+    background: #1a2a40;
+    color: rgba(255,255,255,0.5);
+    padding: 30px clamp(16px, 5vw, 40px);
+    margin-top: 40px;
+    text-align: center;
+    font-size: 12px;
+  }
+  footer .fiction { margin-top: 12px; color: rgba(255,255,255,0.25); font-size: 11px; }
+</style>
+</head>
+<body>
+
+<div class="top-notice">当社は金融庁の認可を受けた生命保険会社です（架空）</div>
+
+<header>
+  <div class="header-inner">
+    <div class="logo-wrap">
+      <div class="logo-icon">あ</div>
+      <div>
+        <div class="logo-text-main">あおぞら生命保険</div>
+        <div class="logo-text-sub">Aozora Life Insurance Co., Ltd.</div>
+      </div>
+    </div>
+    <div class="header-tel">
+      お問い合わせ
+      <strong>0120-XXX-XXX</strong>
+      <span>平日 9:00〜18:00</span>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#">トップ</a>
+    <a href="#" class="active">保険の種類</a>
+    <a href="#">保険料を試算</a>
+    <a href="#">ご契約者様へ</a>
+    <a href="#">よくある質問</a>
+    <a href="#">会社案内</a>
+  </div>
+</nav>
+
+<div class="main">
+  <div class="content">
+    <div class="breadcrumb">
+      <a href="#" style="color:#0052a3; text-decoration:none; pointer-events:none;">トップ</a>
+      <span>›</span>
+      <a href="#" style="color:#0052a3; text-decoration:none; pointer-events:none;">保険の種類</a>
+      <span>›</span>
+      <span>定期生命保険について</span>
+    </div>
+
+    <div class="content-box">
+      <div class="content-title">定期生命保険（かがやき定期プラン）</div>
+      <div class="content-subtitle">被保険者が死亡または高度障害状態になった場合に保険金をお支払いします</div>
+
+      <div class="content-body">
+
+        <h2>保険の概要</h2>
+        <p>定期生命保険は、契約期間中に被保険者が亡くなられた場合、ご指定の受取人に死亡保険金をお支払いする保険です。ご家族の生活保障や、教育費の確保などを目的としてご加入いただく方が多くいらっしゃいます。</p>
+
+        <table class="info-table">
+          <tr><th>保険期間</th><td>10年・15年・20年（更新型あり）</td></tr>
+          <tr><th>保険金額</th><td>500万円〜1億円</td></tr>
+          <tr><th>加入可能年齢</th><td>20歳〜60歳</td></tr>
+          <tr><th>受取人</th><td>配偶者または2親等以内の親族</td></tr>
+          <tr><th>保険料払込</th><td>月払い・年払い（口座振替）</td></tr>
+        </table>
+
+        <h2>保険金が支払われない主な場合（免責事項）</h2>
+        <p>以下の場合は保険金のお支払いができません。必ずご確認ください。</p>
+
+        <table class="info-table">
+          <tr><th>免責事由</th><td>詳細</td></tr>
+          <tr><th>故意</th><td>受取人が故意に被保険者を死亡させた場合</td></tr>
+          <tr>
+            <th style="background:#c62828;">自殺</th>
+            <td style="background:#fff8f8;">
+              <strong>責任開始日（契約日）から <span style="color:#c62828; font-size:15px;">1ヶ月以内</span> の自殺による死亡は、保険金をお支払いできません。</strong><br>
+              <span class="note">※ 責任開始日から1ヶ月を超えた後の自殺による死亡については、死亡保険金をお支払いします。</span>
+            </td>
+          </tr>
+          <tr><th>戦争・暴動</th><td>戦争その他の変乱によって死亡した場合</td></tr>
+          <tr><th>告知義務違反</th><td>ご契約時の告知が事実と異なる場合</td></tr>
+        </table>
+
+        <div class="important-box">
+          <div class="important-title">⚠ 自殺免責期間について（重要）</div>
+          <p>当社の定期生命保険では、<span class="big-text">契約日から1ヶ月間は自殺免責期間となります。</span>この期間中に被保険者が自らの意思で死亡した場合、死亡保険金のお支払いはできません。</p>
+          <p>1ヶ月の免責期間を過ぎた後は、自殺の場合でも保険金をお支払いします。</p>
+          <p class="note">※ 1ヶ月とは、責任開始日の翌日から起算して1ヶ月後の応当日の前日までを指します。</p>
+        </div>
+
+        <h2>ご加入の流れ</h2>
+        <p>①お見積り → ②お申込み → ③告知・審査 → ④ご契約成立（責任開始）</p>
+        <p class="note">※ 審査によってはお引き受けできない場合があります。</p>
+
+      </div>
+    </div>
+  </div>
+
+  <aside class="aside">
+    <div class="aside-box">
+      <div class="aside-title">保険の種類</div>
+      <div class="aside-body">
+        <a href="#" class="aside-link">▶ 定期生命保険（かがやきプラン）</a>
+        <a href="#" class="aside-link">終身保険</a>
+        <a href="#" class="aside-link">医療保険</a>
+        <a href="#" class="aside-link">がん保険</a>
+        <a href="#" class="aside-link">学資保険</a>
+        <a href="#" class="aside-link">個人年金保険</a>
+      </div>
+    </div>
+    <div class="aside-box">
+      <div class="aside-title">よくある質問</div>
+      <div class="aside-body">
+        <a href="#" class="aside-link">保険料の支払いについて</a>
+        <a href="#" class="aside-link">受取人の変更方法</a>
+        <a href="#" class="aside-link">保険金の請求方法</a>
+        <a href="#" class="aside-link">免責事項について</a>
+      </div>
+    </div>
+    <div class="aside-box">
+      <div class="aside-cta">
+        <p>まずは無料で試算</p>
+        <span class="btn-primary">保険料を試算する</span>
+        <span class="btn-secondary">資料請求</span>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<footer>
+  <div>あおぞら生命保険株式会社 © 2026 Aozora Life Insurance Co., Ltd.</div>
+  <div>〒100-0000 東京都千代田区大手町X-X-X　カスタマーセンター: 0120-XXX-XXX</div>
+  <div class="fiction">※ この会社・ページ・保険商品はすべてフィクションです</div>
+</footer>
+
+</body>
+</html>
